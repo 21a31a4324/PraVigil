@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Resident</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/remove_residentstyle.css') }}">
+    <script>
+        function showDialog(listType) {
+            document.getElementById("dialog-box").style.display = "block";  // Show the dialog
+            document.getElementById("list-type").value = listType;  // Store list type
+        }
+
+        function deleteResident() {
+            let vehicleNo = document.getElementById("vehicle-no").value;
+            let listType = document.getElementById("list-type").value;
+
+            if (!vehicleNo) {
+                alert("Please enter a vehicle number.");
+                return;
+            }
+
+            fetch('/remove_resident', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ vehicle_no: vehicleNo, list_type: listType })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById("dialog-box").style.display = "none";  // Hide the dialog
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h2>Shouryanga</h2>
+        <h1>Delete Resident</h1>
+        <div class="nav">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <button onclick="showDialog('resident')">Resident</button>
+        <button onclick="showDialog('suspect')">Suspect</button>
+        <button onclick="showDialog('blocklist')">Blocklist</button>
+
+        <!-- 🚀 Dialog Box BELOW Buttons -->
+        <div id="dialog-box" class="dialog-box">
+            <h2>Delete Entry</h2>
+            <input type="text" id="vehicle-no" placeholder="Enter Vehicle No">
+            <input type="hidden" id="list-type">
+            <button onclick="deleteResident()">Delete</button>
+            <button onclick="document.getElementById('dialog-box').style.display='none'">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

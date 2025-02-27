@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Connection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registerstyle.css') }}">
+    <script>
+        // Show password hint when focusing on password field
+        function showPasswordHint() {
+            document.getElementById("password-hint").style.display = "block";
+        }
+
+        // Hide password hint when not focusing on password field
+        function hidePasswordHint() {
+            document.getElementById("password-hint").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo">Shouryanga</h1>
+        <h1>Make a Connection</h1>
+        <nav>
+            <a href="{{ url_for('introduction') }}">Intro</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- "Already connected?" section -->
+        <div class="already-connected-container">
+            <p class="already-connected">Are you a Resident?</p>
+            <div class="gap"></div>
+            <a href="{{ url_for('user_login') }}" class="user-login-btn">User Login</a>
+        </div>
+
+        <!-- Registration Form (Dialog Box) -->
+        <div class="dialog-box">
+            <h2> Admin Registration</h2>
+            <form action="{{ url_for('register') }}" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required 
+                       onfocus="showPasswordHint()" onblur="hidePasswordHint()">
+                <div id="password-hint" style="display:none; font-size: 12px; color: #888;">
+                    Password must be at least 11 characters, with at least one letter, one number, and one special character.
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" class="register-btn" name="register">Register</button>
+                    <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- JavaScript for Auto-Hiding Flash Messages -->
+    <script>
+        setTimeout(function() {
+            let alerts = document.querySelectorAll(".flash-message");
+            alerts.forEach(alert => {
+                alert.style.transition = "opacity 0.5s";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 3000);  // Disappears after 3 seconds
+    </script>
+
+</body>
+</html>

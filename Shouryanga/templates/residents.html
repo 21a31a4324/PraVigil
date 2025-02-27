@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residents List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/residentsstyle.css') }}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1 class="logo">Shouryanga</h1>
+        <h1>Residents</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Residents Section -->
+    <div class="container">
+        
+        <div class="dialog-box">
+            {% if residents %}
+                <table>
+                    <thead>
+                        <tr>
+                            {% for key in residents[0].keys() %}
+                                <th>{{ key|capitalize }}</th> <!-- Column Headers -->
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in residents %}
+                        <tr>
+                            {% for value in row.values() %}
+                                <td>{{ value }}</td> <!-- Table Content -->
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No residents found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

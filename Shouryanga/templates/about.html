@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Gated Community Access Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aboutstyle.css') }}">
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('introduction') }}">Intro</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dialog-box">
+            <h2>Gated Community Access Management</h2>
+            <p>
+                Our Automated License Plate Recognition (ALPR) system enhances security in gated communities by
+                providing automated vehicle access management. Using machine learning and advanced image
+                processing, the system detects and verifies license plates for seamless **entry and exit.
+            </p>
+            <p>
+                Key features include:
+                <ul>
+                    <li>📌 Real-time vehicle detection</li>
+                    <li>📌 Automatic resident verification</li>
+                    <li>📌 Blacklist and suspicious vehicle alerts</li>
+                    <li>📌 Secure visitor access with authorization</li>
+                </ul>
+            </p>
+            <p>
+                Our goal is to enhance safety and convenience by replacing traditional manual checks
+                with a fast, secure, and intelligent system.
+            </p>
+        </div>
+    </main>
+</body>
+</html>

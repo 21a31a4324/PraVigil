@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_loginstyle.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">Shouryanga</div>
+        <h1>User Login</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('introduction') }}">Intro</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Flash Message Section -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main>
+        <div class="dialog-box">
+            <h2>Enter Your ID</h2>
+            <form id="login-form" method="POST" action="{{ url_for('user_login') }}">
+                <input type="text" name="id" id="user-id" placeholder="Enter your ID" required>
+                <button type="submit">Generate OTP</button>
+            </form>
+            
+            {% if otp is defined and otp %}
+                <p>Your OTP: {{ otp }}</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

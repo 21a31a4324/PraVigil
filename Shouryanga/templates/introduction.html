@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shouryanga - Introduction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="logo">Shouryanga</h1>
+        <h2> Secure Access</h2>
+        <nav>
+            <ul>
+                <li><a href="{{url_for('about')}}">About</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="intro-content">
+            <div class="text">
+                <h2 style="color:#6B4226;">Access Management Using ANPR</h2>
+                <p>Enhance gated community security with automated license plate recognition technology.
+                    A gated community prioritizes security by implementing controlled access points.
+                </p>
+            </div>
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/intro_image.jpg') }}" alt="Intro">
+            </div>
+        </section>
+        <button class="next-btn" onclick="location.href='/security'">Next</button>
+    </main>
+</body>
+</html>

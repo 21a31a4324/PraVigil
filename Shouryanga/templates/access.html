@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Check</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accessstyle.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>Shouryanga</h1>
+        </div>
+        <div class="header-center">
+            <h2>Access Check</h2>
+        </div>
+        <div class="nav-buttons">
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('home') }}">Home</a>
+        </div>
+    </header>
+
+    <!-- Body -->
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/your-image.jpg') }}" alt="Image" class="image">
+                <p class="image-text">Security at Your Fingertips, Access When You Need it.</p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <h3>What's your preference sir/mam?</h3>
+
+            <!-- Form to Upload Image -->
+            <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <input type="file" name="file" id="fileUpload" accept="image/*" style="display: none;" />
+                <input type="hidden" name="action" value="image_upload">
+                <button type="button" id="imageUploadButton">Upload Image</button>
+                <button type="submit" id="uploadSubmitButton" style="display: none;">Submit</button>
+            </form>
+
+            <hr>
+
+            <!-- Camera Capture -->
+            <form action="/upload" method="POST" enctype="multipart/form-data" id="captureForm">
+                <input type="hidden" name="action" value="capture_image">
+                <input type="hidden" name="capturedImage" id="capturedImageInput">
+                <button type="button" id="captureButton">Capture Image</button>
+                <button type="submit" id="captureSubmitButton" style="display: none;">Submit</button>
+            </form>
+
+            <div id="cameraContainer" style="display: none;">
+                <video id="video" autoplay style="width: 320px; height: 240px;"></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <img id="capturedImagePreview" style="display: none; max-width: 200px;" />
+            </div>
+
+            <p>{{ message }}</p>
+        </div>
+    </div>
+
+    <script>
+        // File Upload Handling
+        document.getElementById('imageUploadButton').addEventListener('click', function () {
+            document.getElementById('fileUpload').click();
+        });
+
+        document.getElementById('fileUpload').addEventListener('change', function () {
+            if (this.files.length > 0) {
+                document.getElementById('uploadSubmitButton').click();
+            }
+        });
+
+        // Camera Access & Capture
+        const video = document.getElementById('video');
+        const captureButton = document.getElementById('captureButton');
+        const cameraContainer = document.getElementById('cameraContainer');
+        const canvas = document.getElementById('canvas');
+        const capturedImagePreview = document.getElementById('capturedImagePreview');
+        const capturedImageInput = document.getElementById('capturedImageInput');
+        const captureSubmitButton = document.getElementById('captureSubmitButton');
+        const context = canvas.getContext('2d');
+
+        let streamActive = false;
+
+        captureButton.addEventListener('click', () => {
+            if (!streamActive) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        video.srcObject = stream;
+                        cameraContainer.style.display = "block";
+                        streamActive = true;
+                    })
+                    .catch(error => {
+                        console.error("Error accessing camera:", error);
+                    });
+            } else {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert captured image to data URL
+                const imageData = canvas.toDataURL('image/png');
+                capturedImagePreview.src = imageData;
+                capturedImagePreview.style.display = "block";
+                capturedImageInput.value = imageData;
+
+                // Stop camera stream
+                video.srcObject.getTracks().forEach(track => track.stop());
+                cameraContainer.style.display = "none";
+                streamActive = false;
+
+                // Auto-submit the form
+                captureSubmitButton.click();
+            }
+        });
+    </script>
+
+</body>
+</html>

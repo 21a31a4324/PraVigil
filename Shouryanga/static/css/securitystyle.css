@@ -1,0 +1,116 @@
+/* Reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: whitesmoke; /* Background color for the body */
+    font-family: cursive; /* Cursive font for the entire body */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Move content to the top */
+    height: 100vh; /* Full height of the viewport */
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #6b4226; /* Header background color */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo h2 {
+    color: white;
+    font-family: cursive; /* Cursive font for the logo */
+    font-size: 20px;
+    margin: 0;
+}
+
+.center-text h1 {
+    color: white;
+    font-size: 32px;
+    flex-grow: 1;
+    margin-left: 160px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white; /* Font color for navigation links */
+    font-size: 18px;
+    font-family: cursive; /* Cursive font for navigation */
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.navigation ul li a:hover {
+    background-color: #d6b29e; /* Lighter background on hover */
+}
+
+/* Security Content Styling */
+.security-content {
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 120px; /* Space below the header */
+    width: 100%;
+}
+
+.security-item {
+    text-align: center;
+    width: 45%; /* Make sure the items don’t take full width */
+}
+
+.security-item img {
+    width: 100%;
+    height: auto;
+    max-width: 400px; /* Control the max width of the image */
+    aspect-ratio: 16 / 9; /* Maintain a 16:9 ratio */
+    object-fit: cover; /* Ensure the image covers the box, maintaining its aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.security-item h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Sign Up Button Styling */
+.signup-container {
+    margin-top: 40px;
+}
+
+.signup-btn {
+    display: inline-block;
+    padding: 15px 25px;
+    background-color: #6b4226; /* Button background color */
+    color: white;
+    font-size: 18px;
+    font-family: cursive;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 50px;
+    text-decoration: none;
+}
+
+.signup-btn:hover {
+    background-color: #4f2e19; /* Darker shade of the button color on hover */
+}

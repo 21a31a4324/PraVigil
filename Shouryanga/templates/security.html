@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/securitystyle.css') }}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h2>Shouryanga</h2> <!-- Text Logo -->
+        </div>
+        <div class="center-text">
+            <h1>Services</h1>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="{{ url_for('introduction') }}">Intro</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Security Content Section -->
+    <section class="security-content">
+        <div class="security-item">
+            <img src="{{ url_for('static', filename='images/realtime_notifications.jpg') }}" alt="Real-Time Notifications">
+            <h3>Real-Time Notifications</h3>
+        </div>
+        <div class="security-item">
+            <img src="{{ url_for('static', filename='images/visitors_access.jpg') }}" alt="Visitors Access Control">
+            <h3>Visitors Access Control</h3>
+        </div>
+    </section>
+
+    <!-- Sign-Up Button -->
+    <a href="{{ url_for('register') }}">
+        <button class="signup-btn">Sign Up Now</button>
+    </a>
+</body>
+</html>

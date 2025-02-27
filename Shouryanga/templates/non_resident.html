@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non Resident</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/non_residentstyle.css') }}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <h1 class="logo">Shouryanga</h1>
+        </div>
+        <h1 class="title">Non Resident</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <img src="{{ url_for('static', filename='images/order-delivery.jpg') }}" class="slide" id="slide1">
+            <img src="{{ url_for('static', filename='images/friend-relatives.jpg') }}" class="slide" id="slide2">
+        </div>
+
+        <!-- Purpose of Visit Section -->
+        <div class="form-container">
+            <h2>May we please know the purpose of your visit, sir/madam?</h2>
+            <button type="button" onclick="showDialog('delivery')">Order/Delivery</button>
+            <button type="button" onclick="showDialog('visit')">Visiting a Friend/Relative</button>
+        </div>
+
+        <!-- Dialog Box for ID and OTP Verification -->
+        <div class="dialog-box" id="dialogBox" style="display: none;">
+            <form method="POST" action="{{ url_for('non_resident') }}">
+                {% if verification_stage == 'id' %}
+                    <label for="id">Enter Community ID or Phone Number:</label>
+                    <input type="text" name="id" id="id" required>
+                    <button type="submit">Verify</button>
+                {% elif verification_stage == 'otp' %}
+                    <h3>Oh! You are coming for {{ session.get('resident_name') }}.</h3>
+                    <label for="otp">Enter OTP:</label>
+                    <input type="text" name="otp" id="otp" required>
+                    <button type="submit">Verify OTP</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <script>
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slideshow .slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.style.display = 'none');
+            slides[index].style.display = 'block';
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        showSlide(currentSlide);
+
+        // Show the ID verification dialog based on the purpose
+        function showDialog(purpose) {
+            const dialogBox = document.getElementById('dialogBox');
+            dialogBox.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

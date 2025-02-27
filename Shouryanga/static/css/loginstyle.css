@@ -1,0 +1,137 @@
+body {
+    font-family: cursive;
+    background-color: whitesmoke; /* Background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column; /* Ensures body content stacks properly */
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #6B4226; /* Dark brown background for header */
+    padding: 15px 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Logo (text-based) */
+header .logo {
+    font-size: 20px; /* Logo size */
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+}
+
+/* Header Title (Login) */
+header .header-title {
+    flex-grow: 1; /* Allows centering */
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+
+/* Navigation */
+header .navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Spacing between nav items */
+    margin-right: 30px;
+}
+
+header .navigation ul li a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .navigation ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Login Container */
+.login-container {
+    background-color: #FFF5E1; /* Light shade to contrast with background */
+    padding: 20px; /* Reduced padding for a smaller container */
+    width: 350px; /* Reduced width */
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 80px; /* Ensures content is below the fixed header */
+}
+
+/* Login Heading */
+h2 {
+    color:black;
+    font-size: 22px; /* Slightly reduced font size */
+    margin-bottom: 15px;
+}
+
+/* Login Image Styling */
+.login-image img {
+    width: 100%;  /* Ensuring full width */
+    border-radius: 8px;
+    aspect-ratio: 16 / 9; /* Maintains 16:9 aspect ratio */
+    object-fit: cover; /* Ensures the image is properly fitted */
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+/* Form Inputs */
+input {
+    width: 90%;
+    padding: 10px; /* Reduced padding */
+    margin: 8px 0; /* Reduced margin between inputs */
+    border: 2px solid #6B4226;
+    border-radius: 5px;
+    font-size: 14px; /* Slightly smaller font size */
+    background-color: #FAE0C3; /* Soft beige */
+    color: black;
+}
+
+/* Enhanced Login Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px; /* Reduced margin-top */
+    font-size: 16px; /* Slightly smaller font size */
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #6B4226; /* Highlight color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #57351F; /* Slightly darker brown */
+}
+
+/* Register Link */
+p {
+    font-size: 14px;
+    margin-top: 12px; /* Reduced margin */
+    color: black;
+}
+
+p a {
+    color: #6B4226;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

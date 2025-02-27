@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Gated Community Access Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contactstyle.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{url_for('introduction')}}">Intro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dialog-box">
+            <h2>Get in Touch</h2>
+            <p>If you have any questions or need assistance, feel free to contact us.</p>
+            <p><strong>Email:</strong> nandiniravella17@gmail.com</p>
+            <p><strong>Phone:</strong> +91 9182138162</p>
+            <p><strong>Address:</strong> Pragati engineering college,Kakinada,Andhra Pradesh, India</p>
+        </div>
+    </main>
+</body>
+</html>

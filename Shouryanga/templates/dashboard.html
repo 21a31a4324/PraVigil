@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboardstyle.css') }}">
+
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="header-left">
+            <span class="logo">Shouryanga</span>
+        </div>
+        <div class="header-center">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <nav>
+                <button onclick="location.href='/home'">Home</button>
+                <button onclick="location.href='/about'">About</button>
+                <button onclick="location.href='/contact'">Contact</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="stats">
+            <div class="stat-box">
+                <p>Residents: {{ residents_count }}</p>
+            </div>
+            <div class="stat-box">
+                <p>Suspects: {{ suspect_count }}</p>
+            </div>
+            <div class="stat-box">
+                <p>Blocklisted: {{ blocklist_count }}</p>
+            </div>
+            <div class="stat-box">
+                <p>Access Granted: {{ access_granted_count }}</p>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="donutChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data for the Bar Graph and Donut Chart (replace these with dynamic data from your CSV)
+        var residentsCount = {{ residents_count }};
+        var suspectsCount = {{ suspect_count }};
+        var blocklistCount = {{ blocklist_count }};
+        var accessGrantedCount = {{ access_granted_count }};
+
+        // Bar Graph
+        var ctx1 = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Residents', 'Suspects', 'Blocklisted', 'Access Granted'],
+                datasets: [{
+                    label: 'Count',
+                    data: [residentsCount, suspectsCount, blocklistCount, accessGrantedCount],
+                    backgroundColor: 'rgba(108, 66, 102, 0.6)',
+                    borderColor: 'rgba(108, 66, 102, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Donut Chart
+        var ctx2 = document.getElementById('donutChart').getContext('2d');
+        var donutChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Residents', 'Suspects', 'Blocklisted', 'Access Granted'],
+                datasets: [{
+                    label: 'Count',
+                    data: [residentsCount, suspectsCount, blocklistCount, accessGrantedCount],
+                    backgroundColor: ['#6b4266', '#9b59b6', '#f1c40f', '#2ecc71'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

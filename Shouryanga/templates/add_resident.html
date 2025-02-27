@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Resident</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_residentstyle.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h2>Shouryanga</h2>
+        <h1>Add Resident</h1>
+        <div class="nav">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+    </div>
+    
+    <div class="dialog-box">
+        <h2>Enter Resident Details</h2>
+        <input type="text" id="vehicle_no" placeholder="Vehicle No">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="resident_id" placeholder="ID" readonly>
+        <button onclick="generateID()">Generate ID</button>
+        <input type="text" id="phone_no" placeholder="Phone No">
+        <input type="text" id="flat_no" placeholder="Flat No">
+        <button onclick="updateResident()">Update</button>
+    </div>
+
+    <script>
+        function generateID() {
+            let uniqueID = "SHOU" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById("resident_id").value = uniqueID;
+        }
+
+        function updateResident() {
+            let vehicleNo = document.getElementById("vehicle_no").value;
+            let name = document.getElementById("name").value;
+            let residentID = document.getElementById("resident_id").value;
+            let phoneNo = document.getElementById("phone_no").value;
+            let flatNo = document.getElementById("flat_no").value;
+            
+            if (!vehicleNo || !name || !residentID || !phoneNo || !flatNo) {
+                alert("Please fill all fields.");
+                return;
+            }
+            
+            fetch('/add_resident', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    vehicle_no: vehicleNo,
+                    name: name,
+                    resident_id: residentID,
+                    phone_no: phoneNo,
+                    flat_no: flatNo
+                })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

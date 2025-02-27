@@ -1,0 +1,109 @@
+body {
+    font-family: cursive;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6b4226;
+    color: white;
+    padding: 15px 25px;
+    height: 100px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header h1{
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 240px;
+}
+.header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 200px;
+}
+
+.nav {
+    display: flex;
+    gap: 25px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+/* 🚀 Bigger Buttons */
+button {
+    background-color: #6b4226;
+    color: white;
+    border: none;
+    padding: 15px 30px;  /* Increased padding */
+    margin: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 20px;  /* Bigger font */
+    font-family: cursive;
+}
+
+button:hover {
+    background-color: #5a3720;
+}
+
+/* 🚀 Bigger Dialog Box */
+.dialog-box {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;  /* Wider */
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* 🚀 Bigger Input Fields */
+.dialog-box input {
+    width: 95%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family: cursive;
+}
+
+/* 🚀 Bigger Dialog Buttons */
+.dialog-box button {
+    width: 100%;
+    background-color: #6b4226;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 6px;
+    font-family: cursive;
+}
+
+.dialog-box button:hover {
+    background-color: #6b4226;
+}

@@ -1,0 +1,85 @@
+/* General Page Styling */
+body {
+    font-family: cursive;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6b4226;
+    color: white;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 28px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+/* Popup Dialog Box */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+
+    /* Make it pop up */
+    opacity: 0; /* Initially hidden */
+    transform: translate(-50%, -60%);
+    animation: popupFadeIn 0.5s forwards ease-in-out;
+}
+
+/* Pop-Up Animation */
+@keyframes popupFadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Popup Text */
+.popup-content h2 {
+    color:green;
+    font-size: 20px;
+    gap:10px;
+}
+.popup-content h3 {
+    color:black;
+    font-size: 20px;
+    gap:10px;
+}
+.popup-content h4 {
+    color:black;
+    font-size: 20px;
+    gap:10px;
+}
+.popup-content h5 {
+    color:red;
+    font-size: 20px;
+}

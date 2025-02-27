@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Gated Community Security</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homestyle.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">Shouryanga</div>
+        <div class="welcome">Welcome to Secure Access</div>
+        <nav>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Left Functionalities Section -->
+        <section class="functionalities-container">
+            <div class="functionalities">
+                <h2 class="func-heading">functionalities</h2>
+                <button onclick="location.href='/access'">Access Check</button>
+                <button onclick="location.href='/suspect_list'">Suspect List</button>
+                <button onclick="location.href='/block_list'">Blacklist</button>
+                <button onclick="location.href='/dashboard'">Dashboard</button>
+                <button onclick="location.href='/residents'">Residents</button>
+                <button onclick="location.href='/add_resident'"> Add Resident</button>
+                <button onclick="location.href='/remove_resident'"> Delete Resident</button>
+            </div>
+        </section>
+
+        <!-- Right Slideshow Section -->
+        <section class="slideshow-container">
+            <h2>Make Your Community More Secure With Us</h2>
+            <div class="slideshow">
+                <img src="{{ url_for('static', filename='images/slide1.jpg') }}" class="slide" alt="Security Image 1">
+                <img src="{{ url_for('static', filename='images/slide2.jpg') }}" class="slide" alt="Security Image 2">
+                <img src="{{ url_for('static', filename='images/slide3.jpg') }}" class="slide" alt="Security Image 3">
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let index = 0;
+        function showSlides() {
+            let slides = document.querySelectorAll(".slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            index++;
+            if (index > slides.length) { index = 1; }
+            slides[index - 1].style.display = "block";
+            setTimeout(showSlides, 3000); // Change slide every 3 seconds
+        }
+        document.addEventListener("DOMContentLoaded", showSlides);
+    </script>
+</body>
+</html>

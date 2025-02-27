@@ -1,0 +1,92 @@
+/* General Page Styling */
+body {
+    font-family: cursive;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6b4226;
+    color: white;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 28px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+
+.container {
+    display: flex;
+    margin-top: 30px;
+}
+
+.slideshow {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.slideshow .slide {
+    width: 100%;
+    display: none;
+}
+
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6b4226;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #4e2d1c;
+}
+
+.dialog-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #6b4226;
+}

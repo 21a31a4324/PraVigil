@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspect List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sbcommonstyle.css') }}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1 class="logo">Shouryanga</h1>
+        <h1>Suspect List</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Suspect List Section -->
+    <div class="dialog-box">
+        {% if suspect_list %}
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in suspect_list[0].keys() %}
+                            <th>{{ key|capitalize }}</th>  <!-- Capitalize headers -->
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in suspect_list %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{   value }}</td>  <!-- Display each value correctly -->
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No suspects found.</p>
+        {% endif %}
+    </div>
+    
+
+</body>
+</html>
