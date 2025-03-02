@@ -34,24 +34,24 @@ import re
 
 
 app = Flask(__name__)
-app.secret_key = 'a3f1d9b4e5c6a7f8d9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2'  # Change this for production security
+app.secret_key = 'a3f1d9b4e5c6a7f8d9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2'  #we can Change this for production security of our application
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
-name_regex = re.compile("^[A-Za-z]+$")  # Name should contain only alphabets
+name_regex = re.compile("^[A-Za-z]+$")  # Here I am making sure that name should contain only alphabets
 password_regex = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{11}$")
 
-# File paths
+#These are the File paths
 ADMIN_FILE = 'admin_users.csv'
 RESIDENTS_FILE = 'residents.csv'
 UPLOAD_FOLDER='static/uploads'
 ALLOWED_EXTENSIONS={'png','jpg','jpeg','gif'}
 app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
-# Load YOLO model
+# Loading the YOLO model as I trained my model using the custom data set which I made my self by collecting different license plate images I used easy ocr
 model = YOLO("weights/best.pt")
 
-# Load residents database
+
 RESIDENTS_CSV = "residents.csv"
 
-# Ensure upload directory exists
+# Ensuring whether the upload directory is present or not
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def append_to_suspect_list(vehicle_no):
     """Append a vehicle number to the suspect list and track its count."""
@@ -62,36 +62,36 @@ def append_to_suspect_list(vehicle_no):
     except FileNotFoundError:
         count = 1
 
-    # Append vehicle to suspect list
+    # upon otp failure vehicle no will be appended to suspect list
     with open("suspect_list.csv", mode='a', newline='') as file:
         writer = csv.writer(file)
         if count==1:
             writer.writerow(["vehicle_no"])
         writer.writerow([vehicle_no])
 
-    # Move to block list if count reaches 3
+    # Moving to block list if count of otp failures reaches 3
     if count >= 3:
         move_to_block_list(vehicle_no)
-#Append vehicle to blocklist upon multiple otp failures
+#Appending vehicle to blocklist upon multiple otp failures
 def move_to_block_list(vehicle_no):
     """Move a vehicle from the suspect list to the block list."""
     try:
         block_df = pd.read_csv("block_list.csv", dtype=str)
         if vehicle_no in block_df["vehicle_no"].astype(str).str.strip().str.upper().values:
-            return  # Vehicle already in block list
+            return  # Vehicle already exsists in block list so no need to enter
     except FileNotFoundError:
-        pass  # File will be created below
+        pass  
 
-    # Append to block list
+    # Appending to block list
     with open("block_list.csv", mode='a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([vehicle_no])
         
-#checks the filetype of uploaded image
+#checking the filetype of uploaded image as we allow only few file extensions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
 
-#Main functionality to detect and extract license plate number from uploaded image
+# This is the main functionality to detect and extract license plate number from uploaded image 
 def detect_license_plate(image_path):
     """Perform YOLO detection and OCR extraction on an image."""
     image = cv2.imread(image_path)
@@ -107,11 +107,11 @@ def detect_license_plate(image_path):
             x1, y1, x2, y2 = map(int, box[:4])
             cropped_plate = image[y1:y2, x1:x2]
 
-            # Save the detected plate
+            # we are saving the detected plate here for further use
             cropped_plate_path = os.path.join(app.config["UPLOAD_FOLDER"], "cropped_plate.jpg")
             cv2.imwrite(cropped_plate_path, cropped_plate)
 
-            # Perform OCR
+            # Performing  OCR to detect the vehicle no
             reader = easyocr.Reader(["en"])
             ocr_results = reader.readtext(cropped_plate)
             license_plate_text = "".join([res[1].upper() for res in ocr_results]).strip()
@@ -119,13 +119,13 @@ def detect_license_plate(image_path):
             session["cropped_plate_path"] = cropped_plate_path
 
     return license_plate_text, cropped_plate_path
-#checks whether the vehicle already exsists in residents list
+#checking whether the vehicle already exsists in residents list
 def check_resident(license_plate_text):
-    """Check if the extracted license plate exists in residents.csv"""
+    
     try:
-        df = pd.read_csv("residents.csv", dtype=str,encoding="utf-8")  # Ensure data is read as strings
-        if "vehicle_no" in df.columns:  # Check if the column exists
-            license_plate_text = license_plate_text.strip().upper()  # Clean input
+        df = pd.read_csv("residents.csv", dtype=str,encoding="utf-8")  # I am ensuring that data is read as strings
+        if "vehicle_no" in df.columns:  # Checking if the column exists
+            license_plate_text = license_plate_text.strip().upper() 
             return(license_plate_text in df["vehicle_no"].astype(str).str.strip().str.upper().values)
         else:
            
@@ -138,14 +138,14 @@ def check_resident(license_plate_text):
         return False
 #checks whether the vehicle already in blocklist
 def check_blocklist(license_plate_text):
-    """Check if the extracted license plate exists in block_list.csv"""
+   
     try:
-        # Read the CSV file, ensuring all data is treated as strings
+        # Reading the CSV file, ensuring all data is treated as strings
         df = pd.read_csv("block_list.csv", dtype=str,encoding="utf-8")
         
-        # Ensure the 'vehicle_no' column exists
+        # Ensure the 'vehicle_no' column exists in my csv file
         if "vehicle_no" in df.columns:
-            # Clean the license plate text and check if it exists in the blocklist
+            # Clean the license plate that is removing the gaps and converting to uppercase  text and checking if it exists in the blocklist
             license_plate_text = license_plate_text.strip().upper()
             return license_plate_text in df["vehicle_no"].astype(str).str.strip().str.upper().values
         else:
@@ -158,45 +158,44 @@ def check_blocklist(license_plate_text):
         
         return False
 
-#counts no of entries in each csv file to display in dashboard
+#counting no of entries in each csv file to display in dashboard
 def count_entries(csv_file):
-    """Count the number of non-null entries in a specific column in a CSV file."""
+   
     if not os.path.exists(csv_file):
-        return 0  # File does not exist, return 0
+        return 0  # if File does not exist, return 0
 
     try:
-        # Read only the necessary column
+        # Reading only the necessary column to maintain transperacy
         df = pd.read_csv(csv_file, usecols=["vehicle_no"])
         
-        # Count the non-null entries in the 'vehicle_no' column
+        # Counting the non-null entries in the 'vehicle_no' column
         count = df["vehicle_no"].notnull().sum()
-        return count  # Return the count of non-null vehicle numbers
+        return count  # Returning the count of non-null vehicle numbers to display in dashboard
     except Exception as e:
-        # Log the error (optional, print to console or log file)
+      
         
         return 0  # Return 0 if there is an error
 
-#Appends access given vehicles to csv file
+#Appending the access given vehicles to csv file
 def append_to_csv(file_path, vehicle_no):
-    """Append vehicle_no to a CSV file if it does not already exist."""
     
-    # Check if the file exists
+    # Checking if the file exists
     if os.path.exists(file_path):
         df = pd.read_csv(file_path)
-        # If the vehicle number already exists, return without adding
+        # If the vehicle number already exists, return without adding into the csv file
         if vehicle_no in df["vehicle_no"].values:
             flash(f"Vehicle number {vehicle_no} already exists. Skipping entry.")
             return
     
-    # Append the new vehicle number
+    # Appending the new vehicle number to csv file
     new_data = pd.DataFrame([[vehicle_no]], columns=["vehicle_no"])
     new_data.to_csv(file_path, mode='a', header=not os.path.exists(file_path), index=False)
     flash(f"Vehicle number {vehicle_no} added successfully.")
     
-#takes file uploads
+#accepts the file uploads from the user 
 @app.route("/upload", methods=["POST"])
 def upload_file():
-    """Handle image upload, perform license plate detection, and check residents list."""
+    
     if "file" not in request.files:
         return render_template("access.html", message="No file part")
 
@@ -209,7 +208,7 @@ def upload_file():
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(file_path)
 
-        # Perform detection and OCR
+        # Perform detection and OCR on the uploaded file
         license_plate_text, _ = detect_license_plate(file_path)
         print(license_plate_text)
 
@@ -220,8 +219,8 @@ def upload_file():
                 flash(f"Access granted to vehicle {license_plate_text}.", "success")
                 return redirect(url_for("matched"))
             elif check_blocklist(license_plate_text):
-                # Check if in blocked.csv
-                return redirect(url_for("not_matched"))  # Directly go to unmatched.html
+                # Check if the vehicle no already in blocked.csv and directly restrict the vehicle
+                return redirect(url_for("not_matched"))  
             else:
                 return redirect(url_for("non_resident"))
 
@@ -229,24 +228,24 @@ def upload_file():
 
     return render_template("access.html", message="Invalid file type")
 
-#Html page for file upload
+#Html page for file upload by the user
 @app.route('/access')
 def access():
     return render_template('access.html')
 
-# Ensure the admin CSV exists
+# Ensuring the admin CSV exists
 if not os.path.exists(ADMIN_FILE):
     with open(ADMIN_FILE, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["name", "email", "password"])  # CSV Header for Admins
+        writer.writerow(["name", "email", "password"])  # CSV Header for Admins in the community
 
-# Ensure the residents CSV exists
+# Ensuring the residents CSV exists
 if not os.path.exists(RESIDENTS_FILE):
     with open(RESIDENTS_FILE, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Vehicle_no", "Name", "Resident_id","Phone_no","Flat_no"])  # CSV Header for Residents
+        writer.writerow(["Vehicle_no", "Name", "Resident_id","Phone_no","Flat_no"])  # CSV Header for Residents in the community
 
-# Helper functions to interact with CSV files
+# Helper functions to interact with CSV files to read and write the necessary information to the csv files
 def read_csv(file):
     data = []
     with open(file, mode='r') as f:
@@ -254,7 +253,7 @@ def read_csv(file):
         for row in reader:
             data.append(row)
     return data
-#writes the details of admins from registeration form to csv files
+
 def write_admin(name, email, password):
     with open("admin_users.csv", mode='a', newline='') as file:
         writer = csv.writer(file)
@@ -337,8 +336,8 @@ def user_login():
             flash("ID not found in the residents list.", "danger")
             return redirect(url_for('user_login'))
         otp = random.randint(100000, 999999)
-        session['otp'] = otp  # Store OTP in session
-        session['user_id'] = user_id  # Store user ID in session
+        session['otp'] = otp 
+        session['user_id'] = user_id  
         otp_generated = True
         flash(f"OTP for login: {otp}", "success")
     return render_template('user_login.html', otp_generated=otp_generated, otp=otp)
@@ -366,13 +365,13 @@ def suspect_list():
 @app.route('/dashboard')
 def dashboard():
     
-    # Count entries in each CSV file
+    # Count entries in each CSV file for creating a dashboard
     suspect_count = count_entries("suspect_list.csv")
     blocklist_count = count_entries("block_list.csv")
     access_granted_count = count_entries("access_granted.csv")
     residents_count=count_entries("residents.csv")
     
-    # Pass counts to the template
+    # Pass counts to the template for display
     return render_template(
         'dashboard.html',
         suspect_count=suspect_count,
@@ -399,12 +398,12 @@ def readd(file):
 # Route to display the Non-Resident page
 @app.route('/non_resident', methods=['GET', 'POST'])
 def non_resident():
-    # Reset session data for a new verification process
+    # Reset session data for a new verification process of non residents
     if request.method == 'GET':
-        session.pop('verification_stage', None)  # Clear verification stage
-        session.pop('resident_name', None)  # Clear resident name
-        session.pop('resident_id', None)  # Clear resident ID
-        session.pop('otp', None)  # Clear OTP
+        session.pop('verification_stage', None)  # Clearing verification stage
+        session.pop('resident_name', None)  # Clearing resident name
+        session.pop('resident_id', None)  # Clearing resident ID
+        session.pop('otp', None)  # Clearing OTP
 
     verification_stage = session.get('verification_stage', 'id')  # Default to ID verification
 
@@ -417,30 +416,30 @@ def non_resident():
 
 
             if resident:
-                session['resident_name'] = resident['name']  # Store resident name in session
-                session['resident_id'] = user_input #store resident ID in session
-                verification_stage = "otp"  # Move to OTP verification stage
-                session['verification_stage'] = verification_stage  # Update session
+                session['resident_name'] = resident['name']  # Storing resident name in session
+                session['resident_id'] = user_input #storing resident ID in session
+                verification_stage = "otp"  # Moving to OTP verification stage
+                session['verification_stage'] = verification_stage  # Update the session
                 flash("Please enter the OTP sent to you.", "success")
             else:
                 flash("Invalid Community ID or Phone Number. Please try again.", "danger")
 
         elif verification_stage == "otp":  # OTP Verification Stage
             entered_otp = request.form.get('otp')
-            stored_otp = session.get('otp')  # Retrieve OTP from session
+            stored_otp = session.get('otp')  # Retrieving OTP from session
 
-            if entered_otp == str(stored_otp): # Compare entered OTP with stored OTP
+            if entered_otp == str(stored_otp): # Comparing entered OTP with stored OTP
                 vehicle_no = session.get('extracted_vehicle_no') 
                 append_to_csv("access_granted.csv", [vehicle_no])
                 flash("OTP verified successfully!", "success")
-                return redirect(url_for('matched'))  # Redirect to matched page
+                return redirect(url_for('matched'))  # Redirect to matched page in case of sucessful verification
             else:
-                vehicle_no = session.get('extracted_vehicle_no')  # Retrieve vehicle number
+                vehicle_no = session.get('extracted_vehicle_no')  # Retrieving the vehicle number to add to suspect list
                 if vehicle_no:
                     append_to_suspect_list(vehicle_no)
                     flash("Incorrect OTP. Vehicle added to suspect list.Try again!", "danger")
                 
-                return redirect(url_for('not_matched'))  # Redirect to not_matched page
+                return redirect(url_for('not_matched'))  # Redirect to not_matched page incase of otp failure
 
     return render_template('non_resident.html', verification_stage=verification_stage)
 
@@ -468,12 +467,12 @@ def resident_exists(resident_id, vehicle_no):
 
 @app.route('/add_resident')
 def add_resident_form():
-    """Serve the Add Resident form page."""
+    
     return render_template('add_resident.html')
 
 @app.route('/add_resident', methods=['POST'])
 def add_resident():
-    """Handles form submission to add a new resident."""
+   
     data = request.json
     vehicle_no = data.get("vehicle_no", "").strip()
     name = data.get("name", "").strip()
@@ -481,24 +480,24 @@ def add_resident():
     phone_no = data.get("phone_no", "").strip()
     flat_no = data.get("flat_no", "").strip()
 
-    # Validate required fields
+    # Validating the required fields
     if not all([vehicle_no, name, resident_id, phone_no, flat_no]):
         return jsonify({"message": "All fields are required!"}), 400
 
     if resident_exists(resident_id, vehicle_no):
         return jsonify({"message": "Resident with this ID or Vehicle No already exists!"}), 409
 
-    # Append new resident details to CSV file
+    
     with open(RESIDENTS_FILE, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow([vehicle_no, name, resident_id, phone_no, flat_no])
 
     return jsonify({"message": "Resident added successfully!"}), 201
 
-#deletion
+#deletion of a resident
 
 def delete_entry(file_path, vehicle_no):
-    """Delete an entry from a CSV file based on vehicle number."""
+    
     rows = []
     deleted = False
     with open(file_path, mode='r') as file:
