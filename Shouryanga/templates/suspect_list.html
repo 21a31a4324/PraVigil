@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+   
     <header>
         <h1 class="logo">Shouryanga</h1>
         <h1>Suspect List</h1>
@@ -19,14 +19,14 @@
         </nav>
     </header>
 
-    <!-- Suspect List Section -->
+    
     <div class="dialog-box">
         {% if suspect_list %}
             <table>
                 <thead>
                     <tr>
                         {% for key in suspect_list[0].keys() %}
-                            <th>{{ key|capitalize }}</th>  <!-- Capitalize headers -->
+                            <th>{{ key|capitalize }}</th>  
                         {% endfor %}
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                     {% for row in suspect_list %}
                     <tr>
                         {% for value in row.values() %}
-                            <td>{{   value }}</td>  <!-- Display each value correctly -->
+                            <td>{{   value }}</td>  
                         {% endfor %}
                     </tr>
                     {% endfor %}
