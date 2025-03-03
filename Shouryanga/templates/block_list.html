@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    
     <header>
         <h1 class="logo">Shouryanga</h1>
         <h1>Block List</h1>
@@ -19,7 +19,7 @@
         </nav>
     </header>
 
-    <!-- Blocklist Section -->
+   
     <div class="container">
         
         <div class="dialog-box">
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             {% for key in blocklist[0].keys() %}
-                                <th>{{ key|capitalize }}</th> <!-- Column Headers -->
+                                <th>{{ key|capitalize }}</th> 
                             {% endfor %}
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                         {% for row in blocklist %}
                         <tr>
                             {% for value in row.values() %}
-                                <td>{{ value }}</td> <!-- Table Content -->
+                                <td>{{ value }}</td> 
                             {% endfor %}
                         </tr>
                         {% endfor %}
