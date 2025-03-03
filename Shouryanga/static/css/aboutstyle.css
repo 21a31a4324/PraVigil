@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     background-color: whitesmoke;
     font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@ body {
     height: 100vh;
 }
 
-/* Header */
+
 header {
     background-color: #6B4226;
     color: white;
@@ -48,7 +48,7 @@ nav ul li a {
     font-size: 18px;
 }
 
-/* Main Content */
+
 main {
     display: flex;
     flex-direction: column;
@@ -56,16 +56,16 @@ main {
     align-items: center;
     height: 100vh;
     width: 100%;
-    padding-top: 60px; /* Push content below header */
+    padding-top: 60px; 
 }
 
-/* Dialogue Box */
+
 .dialog-box {
     background-color: white;
     color: black;
     padding: 20px;
     border-radius: 10px;
-    width: 60%; /* Adjust width */
+    width: 60%; 
     max-width: 800px;
     min-height: 250px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -73,7 +73,7 @@ main {
     position: relative;
 }
 
-/* List Styling */
+
 .dialog-box ul {
     text-align: left;
     padding-left: 20px;
