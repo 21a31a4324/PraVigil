@@ -51,16 +51,16 @@ body {
     margin-top: 40px;
 }
 
-/* 🚀 Bigger Buttons */
+
 button {
     background-color: #6b4226;
     color: white;
     border: none;
-    padding: 15px 30px;  /* Increased padding */
+    padding: 15px 30px;  
     margin: 15px;
     cursor: pointer;
     border-radius: 8px;
-    font-size: 20px;  /* Bigger font */
+    font-size: 20px;  
     font-family: cursive;
 }
 
@@ -68,7 +68,7 @@ button:hover {
     background-color: #5a3720;
 }
 
-/* 🚀 Bigger Dialog Box */
+
 .dialog-box {
     display: none;
     background: white;
@@ -80,7 +80,7 @@ button:hover {
     text-align: center;
 }
 
-/* 🚀 Bigger Input Fields */
+
 .dialog-box input {
     width: 95%;
     padding: 12px;
@@ -91,7 +91,7 @@ button:hover {
     font-family: cursive;
 }
 
-/* 🚀 Bigger Dialog Buttons */
+
 .dialog-box button {
     width: 100%;
     background-color: #6b4226;
