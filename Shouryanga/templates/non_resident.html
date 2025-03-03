@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    
     <header>
         <div class="logo-container">
             <h1 class="logo">Shouryanga</h1>
@@ -21,22 +21,22 @@
         </nav>
     </header>
 
-    <!-- Main Content Section -->
+   
     <div class="container">
-        <!-- Slideshow -->
+      
         <div class="slideshow">
             <img src="{{ url_for('static', filename='images/order-delivery.jpg') }}" class="slide" id="slide1">
             <img src="{{ url_for('static', filename='images/friend-relatives.jpg') }}" class="slide" id="slide2">
         </div>
 
-        <!-- Purpose of Visit Section -->
+       
         <div class="form-container">
             <h2>May we please know the purpose of your visit, sir/madam?</h2>
             <button type="button" onclick="showDialog('delivery')">Order/Delivery</button>
             <button type="button" onclick="showDialog('visit')">Visiting a Friend/Relative</button>
         </div>
 
-        <!-- Dialog Box for ID and OTP Verification -->
+       
         <div class="dialog-box" id="dialogBox" style="display: none;">
             <form method="POST" action="{{ url_for('non_resident') }}">
                 {% if verification_stage == 'id' %}
@@ -52,7 +52,7 @@
             </form>
         </div>
 
-        <!-- Flash Messages -->
+     
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-messages">
@@ -67,7 +67,7 @@
     </div>
 
     <script>
-        // Slideshow functionality
+       
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slideshow .slide');
         const totalSlides = slides.length;
@@ -82,10 +82,10 @@
             showSlide(currentSlide);
         }
 
-        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        setInterval(nextSlide, 3000); 
         showSlide(currentSlide);
 
-        // Show the ID verification dialog based on the purpose
+       
         function showDialog(purpose) {
             const dialogBox = document.getElementById('dialogBox');
             dialogBox.style.display = 'block';
