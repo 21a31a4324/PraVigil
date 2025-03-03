@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Header -->
+  
     <header>
         <div class="logo">
             <h1>Shouryanga</h1>
@@ -23,9 +23,9 @@
         </div>
     </header>
 
-    <!-- Body -->
+   
     <div class="container">
-        <!-- Left Section -->
+        
         <div class="left-section">
             <div class="box">
                 <img src="{{ url_for('static', filename='images/your-image.jpg') }}" alt="Image" class="image">
@@ -33,11 +33,11 @@
             </div>
         </div>
 
-        <!-- Right Section -->
+       
         <div class="right-section">
             <h3>What's your preference sir/mam?</h3>
 
-            <!-- Form to Upload Image -->
+           
             <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
                 <input type="file" name="file" id="fileUpload" accept="image/*" style="display: none;" />
                 <input type="hidden" name="action" value="image_upload">
@@ -47,7 +47,7 @@
 
             <hr>
 
-            <!-- Camera Capture -->
+          
             <form action="/upload" method="POST" enctype="multipart/form-data" id="captureForm">
                 <input type="hidden" name="action" value="capture_image">
                 <input type="hidden" name="capturedImage" id="capturedImageInput">
@@ -66,7 +66,7 @@
     </div>
 
     <script>
-        // File Upload Handling
+       
         document.getElementById('imageUploadButton').addEventListener('click', function () {
             document.getElementById('fileUpload').click();
         });
@@ -77,7 +77,7 @@
             }
         });
 
-        // Camera Access & Capture
+        
         const video = document.getElementById('video');
         const captureButton = document.getElementById('captureButton');
         const cameraContainer = document.getElementById('cameraContainer');
@@ -105,18 +105,18 @@
                 canvas.height = video.videoHeight;
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                // Convert captured image to data URL
+                
                 const imageData = canvas.toDataURL('image/png');
                 capturedImagePreview.src = imageData;
                 capturedImagePreview.style.display = "block";
                 capturedImageInput.value = imageData;
 
-                // Stop camera stream
+                
                 video.srcObject.getTracks().forEach(track => track.stop());
                 cameraContainer.style.display = "none";
                 streamActive = false;
 
-                // Auto-submit the form
+               
                 captureSubmitButton.click();
             }
         });
