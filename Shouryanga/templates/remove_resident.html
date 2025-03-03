@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/remove_residentstyle.css') }}">
     <script>
         function showDialog(listType) {
-            document.getElementById("dialog-box").style.display = "block";  // Show the dialog
-            document.getElementById("list-type").value = listType;  // Store list type
+            document.getElementById("dialog-box").style.display = "block";  
+            document.getElementById("list-type").value = listType;  
         }
 
         function deleteResident() {
@@ -28,7 +28,7 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
-                document.getElementById("dialog-box").style.display = "none";  // Hide the dialog
+                document.getElementById("dialog-box").style.display = "none";  
             })
             .catch(error => console.error("Error:", error));
         }
@@ -50,7 +50,7 @@
         <button onclick="showDialog('suspect')">Suspect</button>
         <button onclick="showDialog('blocklist')">Blocklist</button>
 
-        <!-- 🚀 Dialog Box BELOW Buttons -->
+       
         <div id="dialog-box" class="dialog-box">
             <h2>Delete Entry</h2>
             <input type="text" id="vehicle-no" placeholder="Enter Vehicle No">
