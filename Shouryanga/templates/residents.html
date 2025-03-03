@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    
     <header>
         <h1 class="logo">Shouryanga</h1>
         <h1>Residents</h1>
@@ -19,7 +19,7 @@
         </nav>
     </header>
 
-    <!-- Residents Section -->
+  
     <div class="container">
         
         <div class="dialog-box">
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             {% for key in residents[0].keys() %}
-                                <th>{{ key|capitalize }}</th> <!-- Column Headers -->
+                                <th>{{ key|capitalize }}</th> 
                             {% endfor %}
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                         {% for row in residents %}
                         <tr>
                             {% for value in row.values() %}
-                                <td>{{ value }}</td> <!-- Table Content -->
+                                <td>{{ value }}</td> 
                             {% endfor %}
                         </tr>
                         {% endfor %}
