@@ -6,11 +6,11 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboardstyle.css') }}">
 
-    <!-- Chart.js for graphs -->
+   
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Header with Logo and Navigation -->
+    
     <header>
         <div class="header-left">
             <span class="logo">Shouryanga</span>
@@ -27,7 +27,7 @@
         </div>
     </header>
 
-    <!-- Main content area -->
+    
     <div class="container">
         <div class="stats">
             <div class="stat-box">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <!-- Charts -->
+        
         <div class="charts">
             <div class="chart-container">
                 <canvas id="barChart"></canvas>
@@ -56,13 +56,13 @@
     </div>
 
     <script>
-        // Data for the Bar Graph and Donut Chart (replace these with dynamic data from your CSV)
+        
         var residentsCount = {{ residents_count }};
         var suspectsCount = {{ suspect_count }};
         var blocklistCount = {{ blocklist_count }};
         var accessGrantedCount = {{ access_granted_count }};
 
-        // Bar Graph
+     
         var ctx1 = document.getElementById('barChart').getContext('2d');
         var barChart = new Chart(ctx1, {
             type: 'bar',
@@ -86,7 +86,7 @@
             }
         });
 
-        // Donut Chart
+        
         var ctx2 = document.getElementById('donutChart').getContext('2d');
         var donutChart = new Chart(ctx2, {
             type: 'doughnut',
