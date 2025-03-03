@@ -1,28 +1,27 @@
-/* General Page Styling */
 body {
     font-family: cursive;
-    background-color: whitesmoke; /* Beige background */
+    background-color: whitesmoke; 
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* Header Styling */
+
 header {
-    background-color: #6B4226; /* Brown */
+    background-color: #6B4226; 
     color: white;
-    padding: 10px 20px; /* Reduced padding to make it smaller */
-    font-size: 22px; /* Reduced font size */
-    font-family: cursive; /* Cursive font */
+    padding: 10px 20px; 
+    font-size: 22px; 
+    font-family: cursive; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
-    justify-content: center; /* Center items horizontally */
+    justify-content: center; 
     position: relative;
     height: 70px;
 }
 
-/* Logo - Left Aligned */
+
 .logo {
     position: absolute;
     left: 20px;
@@ -30,16 +29,16 @@ header {
     font-weight: bold;
 }
 
-/* Centered "User Login" */
+
 header h1 {
     margin: 0;
     padding: 0;
     font-size: 24px;
     text-align: center;
-    flex-grow: 1; /* Ensures it takes up available space */
+    flex-grow: 1; 
 }
 
-/* Navigation Bar - Right Aligned */
+
 nav {
     position: absolute;
     right: 20px;
@@ -53,7 +52,7 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 20px; /* Space between links */
+    margin-left: 20px; 
 }
 
 nav ul li a {
@@ -63,7 +62,7 @@ nav ul li a {
     font-size: 16px;
 }
 
-/* Dialog Box for OTP */
+
 .dialog-box {
     background-color: white;
     padding: 30px;
@@ -71,27 +70,27 @@ nav ul li a {
     width: 350px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    border: 3px solid #6B4226; /* Brown border */
-    margin-top: 50px; /* Adjusted margin to fit better */
+    border: 3px solid #6B4226; 
+    margin-top: 50px; 
     font-family: cursive;
 }
 
-/* Input Field */
+
 input[type="text"] {
     width: 90%;
     padding: 12px;
     margin: 15px 0;
-    border: 2px solid #6B4226; /* Brown border */
+    border: 2px solid #6B4226; 
     border-radius: 5px;
     font-size: 16px;
     text-align: center;
 }
 
-/* Generate OTP Button */
+
 button {
     width: 100%;
     padding: 12px;
-    background-color: #6B4226; /* Brown */
+    background-color: #6B4226; 
     color: white;
     font-size: 18px;
     border: none;
@@ -104,28 +103,28 @@ button {
 }
 
 button:hover {
-    background-color: #57351F; /* Darker brown */
+    background-color: #57351F; 
 }
 
-/* OTP Display */
+
 #otp-display {
     font-size: 22px;
     font-weight: bold;
-    color: #6B4226; /* Brown */
+    color: #6B4226; 
     margin-top: 15px;
     padding: 10px;
     border: 2px solid #6B4226;
     display: inline-block;
     border-radius: 5px;
-    background-color: #FAEBD7; /* Light beige highlight */
+    background-color: #FAEBD7; 
     text-align: center;
 }
 
-/* Flash Messages - Centered */
+
 .flash {
     display: block;
     width: 50%;
-    margin: 20px auto; /* Centering the flash message */
+    margin: 20px auto; 
     padding: 15px;
     border-radius: 5px;
     text-align: center;
