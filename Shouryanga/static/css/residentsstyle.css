@@ -15,12 +15,12 @@ header {
 }
 table {
     width: 100%;
-    border-collapse: separate;  /* Allows spacing between cells */
-    border-spacing: 10px;  /* Adjusts spacing between table cells */
+    border-collapse: separate;  
+    border-spacing: 10px;  
     margin-top: 15px;
 }
 
-/* Table Headers */
+
 th {
     background-color: #6b4226;
     color: white;
@@ -29,11 +29,11 @@ th {
     border-radius: 5px;
 }
 
-/* Table Cells */
+
 td {
     padding: 12px;
     border-radius: 5px;
-    background-color: #f9f9f9; /* Light background for spacing effect */
+    background-color: #f9f9f9; 
 }
 .logo {
     font-size: 24px;
