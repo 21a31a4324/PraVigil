@@ -1,7 +1,7 @@
 # Title : Intelligent License plate reader
 # FY25-Q1-S1-01/23-Ver:1.0
 # Author : Ravella Nandini.
-# Releases: FY25-Q1-S1-01/20-Ver:2.0-CHG-We have done paper work regarding our project work. 
+# Releases: FY25-Q1-S1-01/20-Ver:2.0-CHG- I have done paper work regarding our project work. 
 # Releases: FY25-Q1-S1-01/21-Ver:1.0-CHG-Preparation of dataset and gathering prerequisites. 
 # Releases: FY25-Q1-S2-01/22-Ver:2.0-CHG-Enhancement of admin login and registration page.  
 # Releases: FY25-Q1-S3-01/24-Ver:2.0-CHG-Fixed bugs in conversion of data from login and registration page to csv.files.  
